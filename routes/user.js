@@ -7,7 +7,7 @@ const {getUser, createUser, editUser } = require('../controllers/user');
 
 router.route('/').get(getUser).post(createUser);
 
-router.route('/:id').get(getUser).patch(editUser);
+router.route('/:userId').get(getUser).patch(editUser);
 
 router.route('/').patch(editUser);
 

@@ -1,5 +1,5 @@
-const Inventory = require('../models/Inventory');
 const inventoryModel = require ('../models/Inventory');
+const {validateInventory} = require('../helpers/validators')
 
 const getInventory = async (req, res) => {
     try {
@@ -28,9 +28,17 @@ const getInventory = async (req, res) => {
 const createInventory = async (req, res) => {
     try {
 
-        serialExist = await inventoryModel.findOne({ serial: req.body.serial });
+        const validations = validateInventory(req);
+
+        if (validations.length > 0){
+            console.log(validations)
+            return res.status(400).send(validations);
+        }
+
+        const serialExist = await inventoryModel.findOne({ serialNumber: req.body.serialNumber });
+
         if (serialExist){
-            return res.status(400).send('This serial number already exist');
+            return res.status(400).send('This serial number already exist');   
         }
 
         let inventory = new inventoryModel();
@@ -50,6 +58,7 @@ const createInventory = async (req, res) => {
 
         inventory = await inventory.save();
         res.send(inventory);
+        
     } catch (error){
         console.log(error);
         res.status(500).send('An error has ocurred');
@@ -59,7 +68,7 @@ const createInventory = async (req, res) => {
 const editInventory = async (req, res) => {
     try {
 
-        let inventory = await Inventory.findById(req.params.inventoryId);
+        let inventory = await inventoryModel.findById(req.params.inventoryId);
         if (!inventory){
             return res.status(400).send('This article does not exist');
         }

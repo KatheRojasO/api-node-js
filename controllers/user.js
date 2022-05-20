@@ -1,7 +1,13 @@
 const userModel = require ('../models/User');
 
-const getUser = (req, res) => {
-    res.send('get user');
+const getUser = async (req, res) => {
+    try {
+        const user = await userModel.find()
+        res.send(user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('A problem has ocurred');
+    }
 }
 
 const createUser = async (req, res) => {
@@ -28,8 +34,30 @@ const createUser = async (req, res) => {
     }
 }
 
-const editUser = (req, res) => {
-    res.send(req.body);
+const editUser = async (req, res) => {
+    try {
+
+        let user = await userModel.findById(req.params.userId);
+        if (!user){
+            return res.status(400).send('This user does not exist');
+        }
+
+        userExist = await userModel.findOne({ name: req.body.name, _id:{$ne: user._id} });
+        if (userExist){
+            return res.status(400).send('This user already exist');
+        }
+
+        user.name = req.body.name;
+        user.email = req.body.email;
+        user.status = req.body.status;
+        user.update_date = new Date();
+
+        user = await user.save();
+        res.send(user);
+    } catch (error){
+        console.log(error);
+        res.status(500).send('An error has ocurred');
+    }
 }
 
 module.exports = {getUser, createUser, editUser}
