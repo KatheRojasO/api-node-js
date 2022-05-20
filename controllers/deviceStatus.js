@@ -1,4 +1,6 @@
 const deviceStatusModel = require ('../models/DeviceStatus');
+const { validateDeviceStatus } = require('../helpers/deviceStatusValidator')
+
 
 const getDeviceStatus = async (req, res) => {
     try {
@@ -12,6 +14,14 @@ const getDeviceStatus = async (req, res) => {
 
 const createDeviceStatus = async (req, res) => {
     try {
+
+        const validations = validateDeviceStatus(req);
+
+        if (validations.length > 0){
+            console.log(validations)
+            return res.status(400).send(validations);
+        }
+
         let deviceStatus = new deviceStatusModel();
         deviceStatus.name = req.body.name;
         deviceStatus.status = req.body.status;

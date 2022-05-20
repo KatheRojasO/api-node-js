@@ -1,5 +1,5 @@
 const inventoryModel = require ('../models/Inventory');
-const {validateInventory} = require('../helpers/validators')
+const {validateInventory} = require('../helpers/inventoryValidators')
 
 const getInventory = async (req, res) => {
     try {

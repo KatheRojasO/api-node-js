@@ -1,4 +1,5 @@
 const deviceBrandModel = require ('../models/DeviceBrand');
+const { validateDeviceBrand } = require('../helpers/deviceBrandValidator')
 
 const getDeviceBrand = async (req, res) => {
     try {
@@ -12,6 +13,14 @@ const getDeviceBrand = async (req, res) => {
 
 const createDeviceBrand = async (req, res) => {
     try {
+
+        const validations = validateDeviceBrand(req);
+
+        if (validations.length > 0){
+            console.log(validations)
+            return res.status(400).send(validations);
+        }
+
         let deviceBrand = new deviceBrandModel();
         deviceBrand.name = req.body.name;
         deviceBrand.status = req.body.status;

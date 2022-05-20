@@ -1,4 +1,5 @@
 const userModel = require ('../models/User');
+const {validateUser} = require('../helpers/userValidator')
 
 const getUser = async (req, res) => {
     try {
@@ -13,6 +14,13 @@ const getUser = async (req, res) => {
 const createUser = async (req, res) => {
     
     try {
+
+        const validations = validateUser(req);
+
+        if (validations.length > 0){
+            console.log(validations)
+            return res.status(400).send(validations);
+        }
         
         userExist = await userModel.findOne({ email: req.body.email });
         if (userExist){
