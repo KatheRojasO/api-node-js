@@ -17,7 +17,6 @@ const createDeviceBrand = async (req, res) => {
         const validations = validateDeviceBrand(req);
 
         if (validations.length > 0){
-            console.log(validations)
             return res.status(400).send(validations);
         }
 

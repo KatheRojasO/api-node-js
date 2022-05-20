@@ -18,7 +18,6 @@ const createUser = async (req, res) => {
         const validations = validateUser(req);
 
         if (validations.length > 0){
-            console.log(validations)
             return res.status(400).send(validations);
         }
         
@@ -51,6 +50,7 @@ const editUser = async (req, res) => {
         }
 
         userExist = await userModel.findOne({ name: req.body.name, _id:{$ne: user._id} });
+        
         if (userExist){
             return res.status(400).send('This user already exist');
         }

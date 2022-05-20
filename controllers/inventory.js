@@ -31,14 +31,14 @@ const createInventory = async (req, res) => {
         const validations = validateInventory(req);
 
         if (validations.length > 0){
-            console.log(validations)
             return res.status(400).send(validations);
         }
 
         const serialExist = await inventoryModel.findOne({ serialNumber: req.body.serialNumber });
-
+        
         if (serialExist){
             return res.status(400).send('This serial number already exist');   
+            
         }
 
         let inventory = new inventoryModel();
@@ -73,9 +73,12 @@ const editInventory = async (req, res) => {
             return res.status(400).send('This article does not exist');
         }
 
-        serialExist = await inventoryModel.findOne({ serial: req.body.serial, _id:{$ne: inventory._id} });
+        serialExist = await inventoryModel.findOne({ serialNumber: req.body.serialNumber, _id:{$ne: inventory._id} });
+        
+
         if (serialExist){
             return res.status(400).send('This serial number already exist');
+            
         }
 
         inventory.serialNumber = req.body.serialNumber;
