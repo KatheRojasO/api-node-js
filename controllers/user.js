@@ -2,8 +2,8 @@ const userModel = require ('../models/User');
 
 const getUser = async (req, res) => {
     try {
-        const user = await userModel.find()
-        res.send(user);
+        const user = await userModel.find({status:'active'});
+        res.send(user)
     } catch (error) {
         console.log(error);
         res.status(500).send('A problem has ocurred');

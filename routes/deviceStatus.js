@@ -7,7 +7,7 @@ const {getDeviceStatus, createDeviceStatus, editDeviceStatus } = require('../con
 
 router.route('/').get(getDeviceStatus).post(createDeviceStatus);
 
-router.route('/:id').get(getDeviceStatus).patch(editDeviceStatus);
+router.route('/:deviceStatusId').get(getDeviceStatus).patch(editDeviceStatus);
 
 router.route('/').patch(editDeviceStatus);
 

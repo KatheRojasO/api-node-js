@@ -7,7 +7,7 @@ const {getDeviceType, createDeviceType, editDeviceType } = require('../controlle
 
 router.route('/').get(getDeviceType).post(createDeviceType);
 
-router.route('/:id').get(getDeviceType).patch(editDeviceType);
+router.route('/:deviceTypeId').get(getDeviceType).patch(editDeviceType);
 
 router.route('/').patch(editDeviceType);
 

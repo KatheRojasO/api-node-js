@@ -7,7 +7,7 @@ const {getDeviceBrand, createDeviceBrand, editDeviceBrand } = require('../contro
 
 router.route('/').get(getDeviceBrand).post(createDeviceBrand);
 
-router.route('/:id').get(getDeviceBrand).patch(editDeviceBrand);
+router.route('/:deviceBrandId').get(getDeviceBrand).patch(editDeviceBrand);
 
 router.route('/').patch(editDeviceBrand);
 
