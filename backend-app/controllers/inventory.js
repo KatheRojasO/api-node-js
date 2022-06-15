@@ -1,5 +1,6 @@
 const inventoryModel = require ('../models/Inventory');
-const {validateInventory} = require('../helpers/inventoryValidators')
+const {validateInventory} = require('../helpers/inventoryValidators');
+const Inventory = require('../models/Inventory');
 
 const getInventory = async (req, res) => {
     try {
@@ -26,8 +27,10 @@ const getInventory = async (req, res) => {
 }
 
 const createInventory = async (req, res) => {
+    
+    console.log(req)
     try {
-
+        
         const validations = validateInventory(req);
 
         if (validations.length > 0){
@@ -66,6 +69,8 @@ const createInventory = async (req, res) => {
 }
 
 const editInventory = async (req, res) => {
+    
+    console.log(req.params.inventoryId)
     try {
 
         let inventory = await inventoryModel.findById(req.params.inventoryId);
@@ -103,4 +108,17 @@ const editInventory = async (req, res) => {
     
 }
 
-module.exports = {getInventory, createInventory, editInventory}
+const getInventoryById = async (req, res) => {
+    try{
+        const inventory = await Inventory.findById(req.params.inventoryId);
+        if(!inventory) {
+            return res.status(404).send('Inventory is not defined');
+        }
+        res.send(inventory)
+    }catch (error){
+        console.log(error)
+        res.status(500).send('An error has occured')
+    }
+}
+
+module.exports = {getInventory, createInventory, editInventory, getInventoryById}

@@ -37,6 +37,7 @@ const createDeviceType = async (req, res) => {
 
 const editDeviceType = async (req, res) => {
     try {
+        console.log('Hola bola')
 
         let deviceType = await deviceTypeModel.findById(req.params.deviceTypeId);
         

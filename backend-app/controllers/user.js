@@ -12,6 +12,8 @@ const getUser = async (req, res) => {
 }
 
 const createUser = async (req, res) => {
+
+    console.log(req.body)
     
     try {
 
@@ -21,7 +23,7 @@ const createUser = async (req, res) => {
             return res.status(400).send(validations);
         }
         
-        userExist = await userModel.findOne({ email: req.body.email });
+        const userExist = await userModel.findOne({ email: req.body.email });
         if (userExist){
             return res.send('This email already exist')
         }
