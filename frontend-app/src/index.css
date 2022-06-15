@@ -1,0 +1,82 @@
+.body{
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f1f5f8;
+    
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.card:hover{
+    box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn{
+    border-radius: 100%;
+    bottom: 25px;
+    font-size: 30px;
+    position: fixed;
+    right: 25px;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.sidebarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.deviceForm{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#formBasic{
+    width: 300px;
+}
+
+#formFile{
+    width: 300px;
+}
+
+.card-img{
+    width: 400px;
+    margin-top: 50px;
+}
+
+.card-update{
+    align-items: center;
+    justify-content: space-between;
+}
+
+#formBasic-update{
+    width: 280px;
+    margin-right: 20px;
+}
+
+#formFile-update{
+    width: 280px;
+}
+
+.inventory-form{
+    margin-top: 10px;
+}
+
