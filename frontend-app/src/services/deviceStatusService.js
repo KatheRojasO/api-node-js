@@ -18,7 +18,15 @@ export const createDeviceStatus = (data) => {
 }
 
 export const editDeviceStatus = (deviceStatusId, data) => {
-    return axiosInstance.put(`deviceStatus/${deviceStatusId}`, data, {
+    return axiosInstance.patch(`deviceStatus/${deviceStatusId}`, data, {
+        headers: {
+            'Content-type': 'application/json'
+        }
+    });
+}
+
+export const getDeviceStatusById = (deviceStatusId, data) => {
+    return axiosInstance.get(`deviceStatus/${deviceStatusId}`, data, {
         headers: {
             'Content-type': 'application/json'
         }

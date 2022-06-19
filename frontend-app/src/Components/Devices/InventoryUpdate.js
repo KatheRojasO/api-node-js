@@ -29,6 +29,7 @@ export const InventoryUpdate = () => {
       try {
           const { data } = await getInventoryById(inventoryId);
           setInventory(data);
+          console.log(data);
       }catch (error){
           console.log(error)
       }
@@ -40,7 +41,7 @@ export const InventoryUpdate = () => {
   const userListing = async () => {
     try {
       const { data }= await getUser();
-      console.log(data)
+      console.log(data);
       setUsers(data);
     }catch(error){
       console.log(error);
@@ -190,6 +191,7 @@ export const InventoryUpdate = () => {
                             return <option key={brand._id} value={brand._id}> {brand.name} </option>
                           })
                         }
+                        
                       </Form.Select>
                     </Form.Group> 
                   </Col>
@@ -216,7 +218,7 @@ export const InventoryUpdate = () => {
                       <Form.Label>Device type:</Form.Label>
                       <Form.Select 
                         name="deviceType" 
-                        value = {deviceType} 
+                        value = { deviceType } 
                         onChange={ (e)=> handleOnChange(e) } required>
                         <option>Select device type</option>
                         {

@@ -70,5 +70,18 @@ const editUser = async (req, res) => {
     }
 }
 
-module.exports = {getUser, createUser, editUser}
+const getUserById = async (req, res) => {
+    try{
+        const user = await userModel.findById(req.params.userId);
+        if(!user) {
+            return res.status(404).send('This user does not exit');
+        }
+        res.send(user)
+    }catch (error){
+        console.log(error)
+        res.status(500).send('An error has occured')
+    }
+}
+
+module.exports = {getUser, createUser, editUser, getUserById}
 

@@ -17,7 +17,15 @@ export const createUser = (data) => {
 }
 
 export const editUser = (userId, data) => {
-    return axiosInstance.put(`user/${userId}`, data, {
+    return axiosInstance.patch(`user/${userId}`, data, {
+        headers: {
+            'Content-type': 'application/json'
+        }
+    });
+}
+
+export const getUserById = (userId, data) => {
+    return axiosInstance.get(`user/${userId}`, data, {
         headers: {
             'Content-type': 'application/json'
         }

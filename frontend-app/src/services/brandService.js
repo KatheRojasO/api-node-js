@@ -18,7 +18,15 @@ export const createDeviceBrand = (data) => {
 }
 
 export const editDeviceBrand = (deviceBrandId, data) => {
-    return axiosInstance.put(`deviceBrand/${deviceBrandId}`, data, {
+    return axiosInstance.patch(`deviceBrand/${deviceBrandId}`, data, {
+        headers: {
+            'Content-type': 'application/json'
+        }
+    });
+}
+
+export const getDeviceBrandById = (deviceBrandId, data) => {
+    return axiosInstance.get(`deviceBrand/${deviceBrandId}`, data, {
         headers: {
             'Content-type': 'application/json'
         }

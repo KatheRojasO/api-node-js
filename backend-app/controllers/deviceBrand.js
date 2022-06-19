@@ -55,5 +55,18 @@ const editDeviceBrand = async (req, res) => {
     }
 }
 
+const getDeviceBrandById = async (req, res) => {
+    try{
+        const brand = await deviceBrandModel.findById(req.params.deviceBrandId);
+        if(!brand) {
+            return res.status(404).send('Device status is not defined');
+        }
+        res.send(brand)
+    }catch (error){
+        console.log(error)
+        res.status(500).send('An error has occured')
+    }
+}
 
-module.exports = {getDeviceBrand, createDeviceBrand, editDeviceBrand}
+
+module.exports = {getDeviceBrand, createDeviceBrand, editDeviceBrand, getDeviceBrandById}

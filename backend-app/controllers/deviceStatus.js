@@ -1,5 +1,6 @@
 const deviceStatusModel = require ('../models/DeviceStatus');
-const { validateDeviceStatus } = require('../helpers/deviceStatusValidator')
+const { validateDeviceStatus } = require('../helpers/deviceStatusValidator');
+const DeviceStatus = require('../models/DeviceStatus');
 
 
 const getDeviceStatus = async (req, res) => {
@@ -57,4 +58,17 @@ const editDeviceStatus = async (req, res) => {
     }
 }
 
-module.exports = {getDeviceStatus, createDeviceStatus, editDeviceStatus}
+const getDeviceStatusById = async (req, res) => {
+    try{
+        const status = await DeviceStatus.findById(req.params.deviceStatusId);
+        if(!status) {
+            return res.status(404).send('Device status is not defined');
+        }
+        res.send(status)
+    }catch (error){
+        console.log(error)
+        res.status(500).send('An error has occured')
+    }
+}
+
+module.exports = {getDeviceStatus, createDeviceStatus, editDeviceStatus, getDeviceStatusById}
